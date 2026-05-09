@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
                 ['title' => 'Klinik Konsultasi Akademik', 'description' => 'Layanan konsultasi gratis oleh kakak tingkat dan alumni berprestasi untuk membantu mahasiswa dalam permasalahan akademik dan perencanaan karir.'],
                 ['title' => 'Gerakan Kampus Hijau', 'description' => 'Inisiatif ramah lingkungan yang mencakup penghijauan kampus, pengelolaan sampah terpadu, dan kampanye gaya hidup berkelanjutan di lingkungan fakultas.'],
             ],
-            'foto' => 'assets/pdf-extracted/page03_img05.jpeg',
+            'foto' => null,
             'status' => 'verified',
         ]);
 

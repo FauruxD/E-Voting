@@ -4,9 +4,9 @@
 
 @section('content')
 @php
-    $foto = $candidate->foto
-        ? (str_starts_with($candidate->foto, 'assets/') ? asset($candidate->foto) : asset('storage/'.$candidate->foto))
-        : asset('assets/pdf-extracted/page03_img05.jpeg');
+    $fotoUrl = $candidate->foto && ! str_starts_with($candidate->foto, 'assets/')
+        ? asset('storage/'.$candidate->foto)
+        : asset('images/default-candidate.svg');
 @endphp
 <main class="container narrow">
     <a class="back-link" href="{{ route('voter.dashboard') }}">← Kembali ke Daftar Paslon</a>
@@ -16,7 +16,7 @@
     @endif
 
     <section class="detail-card hero-detail">
-        <img src="{{ $foto }}" alt="{{ $candidate->pair_name }}">
+        <img src="{{ $fotoUrl }}" alt="{{ $candidate->nama_ketua }} & {{ $candidate->nama_wakil }}">
         <div class="hero-copy">
             <div class="pills">
                 <span class="pill" style="background:var(--accent);color:#091022;font-weight:800">{{ str_pad($candidate->nomor_urut, 2, '0', STR_PAD_LEFT) }}</span>

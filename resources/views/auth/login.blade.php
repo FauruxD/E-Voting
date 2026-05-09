@@ -12,18 +12,19 @@
         @if ($errors->any())
             <div class="error-box" style="margin-top:24px">{{ $errors->first() }}</div>
         @endif
+        @if (session('status'))
+            <div class="flash" style="margin-top:24px">{{ session('status') }}</div>
+        @endif
 
         <div class="input-wrap">
             <label for="npm">NPM</label>
-            <span class="input-icon">▣</span>
-            <input id="npm" name="npm" value="{{ old('npm') }}" placeholder="Enter your 10-digit NPM" autocomplete="username" required>
+            <input id="npm" name="npm" value="{{ old('npm') }}" placeholder="Masukkan NPM Anda" autocomplete="username" required>
         </div>
 
         <div class="input-wrap">
             <label for="pin">PIN</label>
-            <span class="input-icon">▥</span>
-            <input id="pin" name="pin" type="password" placeholder="Enter your 6-digit PIN" autocomplete="current-password" required>
-            <button class="password-toggle" type="button" onclick="const input=document.getElementById('pin'); input.type=input.type === 'password' ? 'text' : 'password';">◉</button>
+            <input id="pin" name="pin" type="password" placeholder="Masukkan PIN Anda" autocomplete="current-password" required>
+            <button class="password-toggle" type="button" onclick="const input=document.getElementById('pin'); input.type=input.type === 'password' ? 'text' : 'password';"></button>
         </div>
 
         <label class="remember">
@@ -32,6 +33,7 @@
         </label>
 
         <button class="primary-btn" style="width:100%;height:46px" type="submit">Masuk</button>
+        <p class="auth-switch">Belum punya akun? <a href="{{ route('register') }}">Registrasi</a></p>
     </form>
 </main>
 @endsection

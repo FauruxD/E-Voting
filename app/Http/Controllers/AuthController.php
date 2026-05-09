@@ -23,6 +23,17 @@ class AuthController extends Controller
         ]);
     }
 
+    public function registerPage(): View|RedirectResponse
+    {
+        if (Auth::check()) {
+            return $this->redirectByRole(Auth::user());
+        }
+
+        return view('auth.register', [
+            'setting' => Setting::current(),
+        ]);
+    }
+
     public function login(Request $request, AuditLogService $auditLog): RedirectResponse
     {
         $credentials = $request->validate([
@@ -46,6 +57,29 @@ class AuthController extends Controller
         $auditLog->record('login_success', $user, [], $request);
 
         return $this->redirectByRole($user);
+    }
+
+    public function register(Request $request, AuditLogService $auditLog): RedirectResponse
+    {
+        $data = $request->validate([
+            'npm' => ['required', 'string', 'max:30', 'unique:users,npm'],
+            'nama' => ['required', 'string', 'max:255'],
+            'jurusan' => ['required', 'string', 'max:255'],
+            'prodi' => ['required', 'string', 'max:255'],
+            'pin' => ['required', 'string', 'max:255'],
+        ]);
+
+        $user = User::create($data + [
+            'peran' => 'voter',
+            'sudah_memilih' => false,
+            'aktif' => true,
+        ]);
+
+        $auditLog->record('register_success', $user, ['npm' => $user->npm], $request);
+
+        return redirect()
+            ->route('login')
+            ->with('status', 'Registrasi berhasil. Silakan masuk menggunakan NPM dan PIN Anda.');
     }
 
     public function logout(Request $request, AuditLogService $auditLog): RedirectResponse

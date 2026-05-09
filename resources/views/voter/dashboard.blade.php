@@ -27,8 +27,13 @@
 
     <section class="candidate-grid">
         @foreach ($candidates as $candidate)
+            @php
+                $fotoUrl = $candidate->foto && ! str_starts_with($candidate->foto, 'assets/')
+                    ? asset('storage/'.$candidate->foto)
+                    : asset('images/default-candidate.svg');
+            @endphp
             <article class="candidate-card">
-                <a class="candidate-cover" href="{{ route('candidates.show', $candidate) }}"></a>
+                <a class="candidate-cover" href="{{ route('candidates.show', $candidate) }}" style="background-image:url('{{ $fotoUrl }}')" aria-label="{{ $candidate->nama_ketua }} & {{ $candidate->nama_wakil }}"></a>
                 <div class="candidate-body">
                     <div class="candidate-title">
                         <div class="serial">{{ str_pad($candidate->nomor_urut, 2, '0', STR_PAD_LEFT) }}</div>

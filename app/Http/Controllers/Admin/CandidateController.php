@@ -31,7 +31,7 @@ class CandidateController extends Controller
     {
         $data = $this->validated($request);
         $data['program_kerja'] = $this->parsePrograms($request->string('program_kerja_text')->toString());
-        $data['foto'] = $this->storePhoto($request);
+        $data['foto'] = $this->storeFoto($request);
         unset($data['program_kerja_text']);
 
         $candidate = Candidate::create($data);
@@ -52,11 +52,11 @@ class CandidateController extends Controller
         unset($data['program_kerja_text']);
 
         if ($request->hasFile('foto')) {
-            if ($candidate->foto && ! str_starts_with($candidate->foto, 'assets/')) {
+            if ($candidate->foto) {
                 Storage::disk('public')->delete($candidate->foto);
             }
 
-            $data['foto'] = $this->storePhoto($request);
+            $data['foto'] = $this->storeFoto($request);
         }
 
         $candidate->update($data);
@@ -106,7 +106,7 @@ class CandidateController extends Controller
             ->all();
     }
 
-    private function storePhoto(Request $request): ?string
+    private function storeFoto(Request $request): ?string
     {
         if (! $request->hasFile('foto')) {
             return null;

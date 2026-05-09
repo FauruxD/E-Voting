@@ -9,11 +9,11 @@
             <div>{{ auth()->user()->nama }}</div>
         </div>
         <nav class="side-nav">
-            <a class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">▰ Dashboard</a>
-            <a class="{{ request()->routeIs('admin.candidates.*') ? 'active' : '' }}" href="{{ route('admin.candidates.index') }}">● Kandidat</a>
-            <a class="{{ request()->routeIs('admin.voters.*') ? 'active' : '' }}" href="{{ route('admin.voters.index') }}">▥ Pemilih</a>
-            <a class="{{ request()->routeIs('admin.results.*') ? 'active' : '' }}" href="{{ route('admin.results.index') }}">▣ Hasil</a>
-            <a class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}" href="{{ route('admin.settings.edit') }}">⚙ Pengaturan</a>
+            <a class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a>
+            <a class="{{ request()->routeIs('admin.candidates.*') ? 'active' : '' }}" href="{{ route('admin.candidates.index') }}">Kandidat</a>
+            <a class="{{ request()->routeIs('admin.voters.*') ? 'active' : '' }}" href="{{ route('admin.voters.index') }}">Pemilih</a>
+            <a class="{{ request()->routeIs('admin.results.*') ? 'active' : '' }}" href="{{ route('admin.results.index') }}">Hasil</a>
+            <a class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}" href="{{ route('admin.settings.edit') }}">Pengaturan</a>
         </nav>
         <form class="side-logout" method="POST" action="{{ route('logout') }}">
             @csrf

@@ -84,7 +84,7 @@
             display: flex;
             flex-direction: column;
         }
-        .candidate-cover { height: 190px; background: var(--blue); background-size: cover; background-position: center; }
+        .candidate-cover { display: block; height: 190px; background-color: #1f2d44; background-size: cover; background-position: center; }
         .candidate-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
         .candidate-title { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; }
         .serial { color: var(--accent); font-weight: 800; font-size: 30px; line-height: 1; min-width: 48px; }
@@ -215,10 +215,8 @@
             display: grid;
             place-items: center;
             background:
-                linear-gradient(180deg, #090909 0 11%, #222 11% 11.4%, transparent 11.4%),
                 radial-gradient(circle at 50% 56%, rgba(30,42,60,.46), transparent 22%),
                 #090909;
-            border-bottom: 8px solid #222;
         }
         .login-card {
             width: min(420px, calc(100% - 32px));
@@ -239,13 +237,15 @@
             border: 1px solid #3e4a5b;
             background: #27313f;
             color: #eef2f8;
-            padding: 0 44px;
+            padding: 0 14px;
             font-size: 14px;
         }
         .input-icon { position: absolute; left: 18px; bottom: 13px; color: #8d96a6; font-size: 14px; }
         .password-toggle { position: absolute; right: 14px; bottom: 11px; background: none; border: 0; color: #8d96a6; font-size: 16px; }
         .remember { display: flex; gap: 10px; color: #b8c3d4; align-items: center; margin: 24px 0 22px; font-size: 14px; }
         .remember input { width: 16px; height: 16px; }
+        .auth-switch { margin: 18px 0 0; color: #b8c3d4; font-size: 14px; text-align: center; }
+        .auth-switch a { color: var(--accent); font-weight: 800; }
         @media (max-width: 1050px) {
             .candidate-grid { grid-template-columns: repeat(2, 1fr); }
             .stats-row, .form-grid { grid-template-columns: 1fr; }

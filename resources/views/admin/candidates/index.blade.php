@@ -23,9 +23,14 @@
             </thead>
             <tbody>
                 @foreach ($candidates as $candidate)
+                    @php
+                        $fotoUrl = $candidate->foto && ! str_starts_with($candidate->foto, 'assets/')
+                            ? asset('storage/'.$candidate->foto)
+                            : asset('images/default-candidate.svg');
+                    @endphp
                     <tr>
                         <td><span style="color:var(--accent);font-weight:800;font-size:18px">{{ str_pad($candidate->nomor_urut, 2, '0', STR_PAD_LEFT) }}</span></td>
-                        <td><div style="width:48px;height:36px;background:#151515;border-radius:6px"></div></td>
+                        <td><img src="{{ $fotoUrl }}" alt="{{ $candidate->nama_ketua }} & {{ $candidate->nama_wakil }}" style="width:48px;height:36px;object-fit:cover;background:#151515;border-radius:6px"></td>
                         <td><strong>{{ $candidate->pair_name }}</strong><br><span style="color:var(--muted)">Visi: {{ str($candidate->visi)->limit(46) }}</span></td>
                         <td>{{ $candidate->jurusan }} / {{ $candidate->prodi }}</td>
                         <td>
