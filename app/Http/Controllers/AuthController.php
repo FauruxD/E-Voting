@@ -33,7 +33,7 @@ class AuthController extends Controller
 
         $user = User::where('npm', $credentials['npm'])->first();
 
-        if (! $user || $user->pin !== $credentials['pin'] || ! $user->is_active) {
+        if (! $user || $user->pin !== $credentials['pin'] || ! $user->aktif) {
             $auditLog->record('login_failed', $user, ['npm' => $credentials['npm']], $request);
 
             return back()

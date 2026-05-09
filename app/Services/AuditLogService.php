@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class AuditLogService
 {
-    public function record(string $action, ?User $user = null, array $metadata = [], ?Request $request = null): void
+    public function record(string $aksi, ?User $user = null, array $detail = [], ?Request $request = null): void
     {
         $request ??= request();
 
         AuditLog::create([
-            'user_id' => $user?->id,
-            'action' => $action,
-            'ip_address' => $request?->ip(),
-            'user_agent' => $request?->userAgent(),
-            'metadata' => $metadata ?: null,
+            'pengguna_id' => $user?->id,
+            'aksi' => $aksi,
+            'alamat_ip' => $request?->ip(),
+            'agen_pengguna' => $request?->userAgent(),
+            'detail' => $detail ?: null,
         ]);
     }
 }

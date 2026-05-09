@@ -38,9 +38,9 @@
                     <tr>
                         <td>{{ $loop->iteration + (($voters->currentPage() - 1) * $voters->perPage()) }}</td>
                         <td>{{ $voter->npm }}</td>
-                        <td><strong>{{ $voter->name }}</strong></td>
+                        <td><strong>{{ $voter->nama }}</strong></td>
                         <td>
-                            @if ($voter->has_voted)
+                            @if ($voter->sudah_memilih)
                                 <span class="status success">● Sudah</span>
                             @else
                                 <span class="status danger">○ Belum</span>
@@ -61,6 +61,6 @@
             </tbody>
         </table>
     </div>
-    <div style="padding:24px 38px;color:var(--muted)">{{ $voters->links() }}</div>
+    <div style="padding:16px 20px;color:var(--muted);font-size:13px">{{ $voters->links() }}</div>
 </section>
 @endsection

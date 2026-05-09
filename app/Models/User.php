@@ -21,13 +21,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'npm',
-        'name',
-        'faculty',
-        'major',
+        'nama',
+        'jurusan',
+        'prodi',
         'pin',
-        'role',
-        'has_voted',
-        'is_active',
+        'peran',
+        'sudah_memilih',
+        'aktif',
     ];
 
     /**
@@ -47,28 +47,28 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'has_voted' => 'boolean',
-            'is_active' => 'boolean',
+            'sudah_memilih' => 'boolean',
+            'aktif' => 'boolean',
         ];
     }
 
     public function vote(): HasOne
     {
-        return $this->hasOne(Vote::class);
+        return $this->hasOne(Vote::class, 'pemilih_id');
     }
 
     public function auditLogs(): HasMany
     {
-        return $this->hasMany(AuditLog::class);
+        return $this->hasMany(AuditLog::class, 'pengguna_id');
     }
 
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->peran === 'admin';
     }
 
     public function isVoter(): bool
     {
-        return $this->role === 'voter';
+        return $this->peran === 'voter';
     }
 }

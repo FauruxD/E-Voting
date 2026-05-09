@@ -6,7 +6,7 @@
         <a class="brand" href="{{ route('admin.dashboard') }}">BEM <span>E-VOTING</span></a>
         <div class="admin-profile">
             <div class="avatar"></div>
-            <div>{{ auth()->user()->name }}</div>
+            <div>{{ auth()->user()->nama }}</div>
         </div>
         <nav class="side-nav">
             <a class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">▰ Dashboard</a>
@@ -25,7 +25,7 @@
             <div>
                 <h1>@yield('admin_title')</h1>
                 @hasSection('admin_subtitle')
-                    <p class="lead" style="font-size:21px;margin-top:6px">@yield('admin_subtitle')</p>
+                    <p class="lead" style="font-size:14px;margin-top:4px">@yield('admin_subtitle')</p>
                 @endif
             </div>
             @yield('admin_action')

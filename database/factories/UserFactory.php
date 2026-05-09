@@ -20,13 +20,13 @@ class UserFactory extends Factory
     {
         return [
             'npm' => fake()->unique()->numerify('23#####'),
-            'name' => fake()->name(),
-            'faculty' => fake()->randomElement(['Teknik', 'Ekonomi', 'Ilmu Komunikasi', 'MIPA']),
-            'major' => fake()->randomElement(['Informatika', 'Manajemen', 'Biologi', 'Komunikasi']),
+            'nama' => fake()->name(),
+            'jurusan' => fake()->randomElement(['Teknik', 'Ekonomi', 'Ilmu Komunikasi', 'MIPA']),
+            'prodi' => fake()->randomElement(['Informatika', 'Manajemen', 'Biologi', 'Komunikasi']),
             'pin' => '123456',
-            'role' => 'voter',
-            'has_voted' => false,
-            'is_active' => true,
+            'peran' => 'voter',
+            'sudah_memilih' => false,
+            'aktif' => true,
             'remember_token' => Str::random(10),
         ];
     }

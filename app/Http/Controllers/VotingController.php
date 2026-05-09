@@ -17,7 +17,7 @@ class VotingController extends Controller
     {
         return view('voter.dashboard', [
             'setting' => Setting::current(),
-            'candidates' => Candidate::where('status', 'verified')->orderBy('serial_number')->get(),
+            'candidates' => Candidate::where('status', 'verified')->orderBy('nomor_urut')->get(),
             'user' => $request->user(),
         ]);
     }
@@ -30,7 +30,7 @@ class VotingController extends Controller
     ): RedirectResponse {
         try {
             $votingService->submit($request->user(), $candidate);
-            $auditLog->record('vote_submitted', $request->user(), ['candidate_id' => $candidate->id], $request);
+            $auditLog->record('vote_submitted', $request->user(), ['kandidat_id' => $candidate->id], $request);
 
             return redirect()->route('results.public')->with('status', 'Suara Anda berhasil dikumpulkan.');
         } catch (Exception $exception) {

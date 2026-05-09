@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, string $role): Response
+    public function handle(Request $request, Closure $next, string $peran): Response
     {
-        if (! $request->user() || $request->user()->role !== $role) {
+        if (! $request->user() || $request->user()->peran !== $peran) {
             abort(403);
         }
 

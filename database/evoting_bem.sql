@@ -288,4 +288,4 @@ INSERT INTO audit_logs (
     created_at,
     updated_at
 ) VALUES
-((SELECT id FROM users WHERE npm = 'admin001'), 'database_seeded', '127.0.0.1', 'SQL Import', '{"source":"database/schema/evoting_bem.sql"}', NOW(), NOW());
+((SELECT id FROM users WHERE npm = 'admin001'), 'database_seeded', '127.0.0.1', 'SQL Import', '{"source":"database/evoting_bem.sql"}', NOW(), NOW());

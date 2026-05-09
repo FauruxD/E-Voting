@@ -16,7 +16,7 @@ class CandidateController extends Controller
     public function index(): View
     {
         return view('admin.candidates.index', [
-            'candidates' => Candidate::withCount('votes')->orderBy('serial_number')->get(),
+            'candidates' => Candidate::withCount('votes')->orderBy('nomor_urut')->get(),
         ]);
     }
 
@@ -30,12 +30,12 @@ class CandidateController extends Controller
     public function store(Request $request, AuditLogService $auditLog): RedirectResponse
     {
         $data = $this->validated($request);
-        $data['work_programs'] = $this->parsePrograms($request->string('work_programs_text')->toString());
-        $data['photo'] = $this->storePhoto($request);
-        unset($data['work_programs_text']);
+        $data['program_kerja'] = $this->parsePrograms($request->string('program_kerja_text')->toString());
+        $data['foto'] = $this->storePhoto($request);
+        unset($data['program_kerja_text']);
 
         $candidate = Candidate::create($data);
-        $auditLog->record('candidate_created', $request->user(), ['candidate_id' => $candidate->id], $request);
+        $auditLog->record('candidate_created', $request->user(), ['kandidat_id' => $candidate->id], $request);
 
         return redirect()->route('admin.candidates.index')->with('status', 'Kandidat berhasil ditambahkan.');
     }
@@ -48,26 +48,26 @@ class CandidateController extends Controller
     public function update(Request $request, Candidate $candidate, AuditLogService $auditLog): RedirectResponse
     {
         $data = $this->validated($request, $candidate);
-        $data['work_programs'] = $this->parsePrograms($request->string('work_programs_text')->toString());
-        unset($data['work_programs_text']);
+        $data['program_kerja'] = $this->parsePrograms($request->string('program_kerja_text')->toString());
+        unset($data['program_kerja_text']);
 
-        if ($request->hasFile('photo')) {
-            if ($candidate->photo && ! str_starts_with($candidate->photo, 'assets/')) {
-                Storage::disk('public')->delete($candidate->photo);
+        if ($request->hasFile('foto')) {
+            if ($candidate->foto && ! str_starts_with($candidate->foto, 'assets/')) {
+                Storage::disk('public')->delete($candidate->foto);
             }
 
-            $data['photo'] = $this->storePhoto($request);
+            $data['foto'] = $this->storePhoto($request);
         }
 
         $candidate->update($data);
-        $auditLog->record('candidate_updated', $request->user(), ['candidate_id' => $candidate->id], $request);
+        $auditLog->record('candidate_updated', $request->user(), ['kandidat_id' => $candidate->id], $request);
 
         return redirect()->route('admin.candidates.index')->with('status', 'Kandidat berhasil diperbarui.');
     }
 
     public function destroy(Request $request, Candidate $candidate, AuditLogService $auditLog): RedirectResponse
     {
-        $auditLog->record('candidate_deleted', $request->user(), ['candidate_id' => $candidate->id], $request);
+        $auditLog->record('candidate_deleted', $request->user(), ['kandidat_id' => $candidate->id], $request);
         $candidate->delete();
 
         return redirect()->route('admin.candidates.index')->with('status', 'Kandidat berhasil dihapus.');
@@ -76,16 +76,16 @@ class CandidateController extends Controller
     private function validated(Request $request, ?Candidate $candidate = null): array
     {
         return $request->validate([
-            'serial_number' => ['required', 'integer', 'min:1', Rule::unique('candidates', 'serial_number')->ignore($candidate?->id)],
-            'chairman_name' => ['required', 'string', 'max:255'],
-            'vice_name' => ['required', 'string', 'max:255'],
-            'faculty' => ['nullable', 'string', 'max:255'],
-            'major' => ['nullable', 'string', 'max:255'],
-            'batch' => ['nullable', 'string', 'max:50'],
-            'vision' => ['required', 'string'],
-            'mission' => ['required', 'string'],
-            'work_programs_text' => ['nullable', 'string'],
-            'photo' => ['nullable', 'image', 'max:4096'],
+            'nomor_urut' => ['required', 'integer', 'min:1', Rule::unique('candidates', 'nomor_urut')->ignore($candidate?->id)],
+            'nama_ketua' => ['required', 'string', 'max:255'],
+            'nama_wakil' => ['required', 'string', 'max:255'],
+            'jurusan' => ['nullable', 'string', 'max:255'],
+            'prodi' => ['nullable', 'string', 'max:255'],
+            'angkatan' => ['nullable', 'string', 'max:50'],
+            'visi' => ['required', 'string'],
+            'misi' => ['required', 'string'],
+            'program_kerja_text' => ['nullable', 'string'],
+            'foto' => ['nullable', 'image', 'max:4096'],
             'status' => ['required', Rule::in(['verified', 'pending'])],
         ]);
     }
@@ -108,10 +108,10 @@ class CandidateController extends Controller
 
     private function storePhoto(Request $request): ?string
     {
-        if (! $request->hasFile('photo')) {
+        if (! $request->hasFile('foto')) {
             return null;
         }
 
-        return $request->file('photo')->store('candidates', 'public');
+        return $request->file('foto')->store('candidates', 'public');
     }
 }

@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('npm', 30)->unique();
-            $table->string('name');
-            $table->string('faculty')->nullable();
-            $table->string('major')->nullable();
+            $table->string('nama');
+            $table->string('jurusan')->nullable();
+            $table->string('prodi')->nullable();
             $table->string('pin');
-            $table->enum('role', ['voter', 'admin'])->default('voter');
-            $table->boolean('has_voted')->default(false);
-            $table->boolean('is_active')->default(true);
+            $table->enum('peran', ['voter', 'admin'])->default('voter');
+            $table->boolean('sudah_memilih')->default(false);
+            $table->boolean('aktif')->default(true);
             $table->rememberToken();
             $table->timestamps();
 
-            $table->index('role');
-            $table->index('has_voted');
-            $table->index('is_active');
+            $table->index('peran');
+            $table->index('sudah_memilih');
+            $table->index('aktif');
         });
 
         Schema::create('sessions', function (Blueprint $table) {

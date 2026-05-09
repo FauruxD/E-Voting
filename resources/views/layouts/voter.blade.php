@@ -13,7 +13,7 @@
             <a href="#tentang">Tentang</a>
         </nav>
         <div class="account">
-            <span>● {{ auth()->user()->name }}</span>
+            <span>● {{ auth()->user()->nama }}</span>
             <span class="divider"></span>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

@@ -10,13 +10,14 @@ return new class extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->unique()->constrained()->cascadeOnDelete();
-            $table->foreignId('candidate_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('voted_at')->useCurrent();
+            $table->foreignId('pemilih_id')->unique()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('kandidat_id')->constrained('candidates')->cascadeOnDelete();
+            $table->timestamp('dipilih_pada')->useCurrent();
             $table->timestamps();
 
-            $table->index('candidate_id');
-            $table->index('voted_at');
+            $table->index('pemilih_id');
+            $table->index('kandidat_id');
+            $table->index('dipilih_pada');
         });
     }
 

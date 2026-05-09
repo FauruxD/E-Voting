@@ -11,33 +11,33 @@ class Candidate extends Model
     use HasFactory;
 
     protected $fillable = [
-        'serial_number',
-        'chairman_name',
-        'vice_name',
-        'faculty',
-        'major',
-        'batch',
-        'vision',
-        'mission',
-        'work_programs',
-        'photo',
+        'nomor_urut',
+        'nama_ketua',
+        'nama_wakil',
+        'jurusan',
+        'prodi',
+        'angkatan',
+        'visi',
+        'misi',
+        'program_kerja',
+        'foto',
         'status',
     ];
 
     protected function casts(): array
     {
         return [
-            'work_programs' => 'array',
+            'program_kerja' => 'array',
         ];
     }
 
     public function votes(): HasMany
     {
-        return $this->hasMany(Vote::class);
+        return $this->hasMany(Vote::class, 'kandidat_id');
     }
 
     public function getPairNameAttribute(): string
     {
-        return "{$this->chairman_name} & {$this->vice_name}";
+        return "{$this->nama_ketua} & {$this->nama_wakil}";
     }
 }

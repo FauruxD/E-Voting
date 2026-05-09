@@ -16,7 +16,7 @@
                     <th>No Urut</th>
                     <th>Foto</th>
                     <th>Nama Paslon</th>
-                    <th>Fakultas / Jurusan</th>
+                    <th>Jurusan / Prodi</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -24,10 +24,10 @@
             <tbody>
                 @foreach ($candidates as $candidate)
                     <tr>
-                        <td><span style="color:var(--accent);font-weight:800;font-size:26px">{{ str_pad($candidate->serial_number, 2, '0', STR_PAD_LEFT) }}</span></td>
-                        <td><div style="width:64px;height:48px;background:#151515;border-radius:6px"></div></td>
-                        <td><strong>{{ $candidate->pair_name }}</strong><br><span style="color:var(--muted)">Visi: {{ str($candidate->vision)->limit(46) }}</span></td>
-                        <td>{{ $candidate->faculty }} / {{ $candidate->major }}</td>
+                        <td><span style="color:var(--accent);font-weight:800;font-size:18px">{{ str_pad($candidate->nomor_urut, 2, '0', STR_PAD_LEFT) }}</span></td>
+                        <td><div style="width:48px;height:36px;background:#151515;border-radius:6px"></div></td>
+                        <td><strong>{{ $candidate->pair_name }}</strong><br><span style="color:var(--muted)">Visi: {{ str($candidate->visi)->limit(46) }}</span></td>
+                        <td>{{ $candidate->jurusan }} / {{ $candidate->prodi }}</td>
                         <td>
                             @if ($candidate->status === 'verified')
                                 <span class="status success">Verified</span>

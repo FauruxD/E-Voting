@@ -31,7 +31,7 @@
             Remember me
         </label>
 
-        <button class="primary-btn" style="width:100%;height:78px" type="submit">Masuk</button>
+        <button class="primary-btn" style="width:100%;height:46px" type="submit">Masuk</button>
     </form>
 </main>
 @endsection

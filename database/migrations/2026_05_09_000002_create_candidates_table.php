@@ -10,21 +10,21 @@ return new class extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->integer('serial_number')->unique();
-            $table->string('chairman_name');
-            $table->string('vice_name');
-            $table->string('faculty')->nullable();
-            $table->string('major')->nullable();
-            $table->string('batch', 50)->nullable();
-            $table->text('vision');
-            $table->longText('mission');
-            $table->json('work_programs')->nullable();
-            $table->string('photo')->nullable();
+            $table->integer('nomor_urut')->unique();
+            $table->string('nama_ketua');
+            $table->string('nama_wakil');
+            $table->string('jurusan')->nullable();
+            $table->string('prodi')->nullable();
+            $table->string('angkatan', 50)->nullable();
+            $table->text('visi');
+            $table->longText('misi');
+            $table->json('program_kerja')->nullable();
+            $table->string('foto')->nullable();
             $table->enum('status', ['verified', 'pending'])->default('pending');
             $table->timestamps();
 
             $table->index('status');
-            $table->index('serial_number');
+            $table->index('nomor_urut');
         });
     }
 

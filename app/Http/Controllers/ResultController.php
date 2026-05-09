@@ -16,7 +16,7 @@ class ResultController extends Controller
         return view('results.public', [
             'setting' => $setting,
             'summary' => $resultService->summary(),
-            'results' => $setting->result_visibility ? $resultService->candidateResults(true) : collect(),
+            'results' => $setting->hasil_ditampilkan ? $resultService->candidateResults(true) : collect(),
             'user' => $request->user(),
         ]);
     }

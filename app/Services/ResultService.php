@@ -11,7 +11,7 @@ class ResultService
 {
     public function summary(): array
     {
-        $totalVoters = User::where('role', 'voter')->count();
+        $totalVoters = User::where('peran', 'voter')->count();
         $totalVotes = Vote::count();
         $notVoted = max($totalVoters - $totalVotes, 0);
         $participation = $totalVoters > 0 ? round(($totalVotes / $totalVoters) * 100, 1) : 0;
@@ -26,7 +26,7 @@ class ResultService
         return Candidate::query()
             ->when($verifiedOnly, fn ($query) => $query->where('status', 'verified'))
             ->withCount('votes')
-            ->orderBy('serial_number')
+            ->orderBy('nomor_urut')
             ->get()
             ->map(function (Candidate $candidate) use ($totalVotes) {
                 $candidate->percentage = $totalVotes > 0 ? round(($candidate->votes_count / $totalVotes) * 100, 1) : 0;

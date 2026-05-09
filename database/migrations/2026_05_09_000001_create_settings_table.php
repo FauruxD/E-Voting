@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('app_name')->default('BEM E-Voting');
-            $table->string('election_title')->default('Pemilihan Umum BEM 2026');
-            $table->enum('voting_status', ['open', 'closed'])->default('closed');
-            $table->boolean('result_visibility')->default(false);
-            $table->dateTime('voting_start')->nullable();
-            $table->dateTime('voting_end')->nullable();
+            $table->string('nama_aplikasi')->default('BEM E-Voting');
+            $table->string('judul_pemilihan')->default('Pemilihan Umum BEM 2026');
+            $table->enum('status_voting', ['open', 'closed'])->default('closed');
+            $table->boolean('hasil_ditampilkan')->default(false);
+            $table->dateTime('mulai_voting')->nullable();
+            $table->dateTime('selesai_voting')->nullable();
             $table->timestamps();
         });
     }

@@ -6,13 +6,13 @@
 <main class="container">
     <div class="header-row">
         <div>
-            <p class="eyebrow">{{ strtoupper($setting->election_title) }}</p>
+            <p class="eyebrow">{{ strtoupper($setting->judul_pemilihan) }}</p>
             <h1>Daftar Paslon</h1>
             <p class="lead">Pilih satu pasangan calon yang kamu dukung. Setiap pemilih hanya dapat memilih satu kali.</p>
         </div>
         <div class="timer">
             <div>Sisa Waktu Voting</div>
-            <strong>{{ $setting->voting_end ? now()->diff($setting->voting_end)->format('%H : %I : %S') : '00 : 00 : 00' }}</strong>
+            <strong>{{ $setting->selesai_voting ? now()->diff($setting->selesai_voting)->format('%H : %I : %S') : '00 : 00 : 00' }}</strong>
         </div>
     </div>
 
@@ -31,9 +31,9 @@
                 <a class="candidate-cover" href="{{ route('candidates.show', $candidate) }}"></a>
                 <div class="candidate-body">
                     <div class="candidate-title">
-                        <div class="serial">{{ str_pad($candidate->serial_number, 2, '0', STR_PAD_LEFT) }}</div>
+                        <div class="serial">{{ str_pad($candidate->nomor_urut, 2, '0', STR_PAD_LEFT) }}</div>
                         <div>
-                            <div class="candidate-name">{{ $candidate->chairman_name }} <span>& {{ $candidate->vice_name }}</span></div>
+                            <div class="candidate-name">{{ $candidate->nama_ketua }} <span>& {{ $candidate->nama_wakil }}</span></div>
                         </div>
                     </div>
                     <div class="pills">
@@ -41,10 +41,10 @@
                         <span class="pill">Wakil Ketua</span>
                     </div>
                     <div class="mini-label">Visi</div>
-                    <p>{{ $candidate->vision }}</p>
+                    <p>{{ $candidate->visi }}</p>
                     <form method="POST" action="{{ route('vote.store', $candidate) }}" style="margin-top:auto">
                         @csrf
-                        <button class="primary-btn full" type="submit" @disabled(! $setting->isVotingOpen() || $user->has_voted)>▣ Pilih Paslon Ini</button>
+                        <button class="primary-btn full" type="submit" @disabled(! $setting->isVotingOpen() || $user->sudah_memilih)>▣ Pilih Paslon Ini</button>
                     </form>
                 </div>
             </article>

@@ -11,25 +11,25 @@ class Vote extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'candidate_id',
-        'voted_at',
+        'pemilih_id',
+        'kandidat_id',
+        'dipilih_pada',
     ];
 
     protected function casts(): array
     {
         return [
-            'voted_at' => 'datetime',
+            'dipilih_pada' => 'datetime',
         ];
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'pemilih_id');
     }
 
     public function candidate(): BelongsTo
     {
-        return $this->belongsTo(Candidate::class);
+        return $this->belongsTo(Candidate::class, 'kandidat_id');
     }
 }

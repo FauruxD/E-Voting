@@ -15,18 +15,18 @@
         <article class="result-card {{ $loop->first ? 'top' : '' }}">
             <div class="result-head">
                 <div class="result-name">
-                    <div class="serial box">{{ str_pad($candidate->serial_number, 2, '0', STR_PAD_LEFT) }}</div>
+                    <div class="serial box">{{ str_pad($candidate->nomor_urut, 2, '0', STR_PAD_LEFT) }}</div>
                     <div>
-                        <h2>Paslon {{ str_pad($candidate->serial_number, 2, '0', STR_PAD_LEFT) }}: {{ $candidate->pair_name }}</h2>
-                        <div class="result-meta">Visi: {{ str($candidate->vision)->limit(60) }}</div>
+                        <h2>Paslon {{ str_pad($candidate->nomor_urut, 2, '0', STR_PAD_LEFT) }}: {{ $candidate->pair_name }}</h2>
+                        <div class="result-meta">Visi: {{ str($candidate->visi)->limit(60) }}</div>
                     </div>
                 </div>
-                <div class="percent" style="font-size:34px">{{ number_format($candidate->votes_count, 0, ',', '.') }}<span>Suara</span><strong style="font-size:31px;color:#fff">{{ $candidate->percentage }}%</strong></div>
+                <div class="percent" style="font-size:24px">{{ number_format($candidate->votes_count, 0, ',', '.') }}<span>Suara</span><strong style="font-size:22px;color:#fff">{{ $candidate->percentage }}%</strong></div>
             </div>
             <div class="progress"><span style="width:{{ $candidate->percentage }}%"></span></div>
-            <div style="display:flex;justify-content:space-between;color:#8e8e8e;margin-top:10px"><span>0%</span><span>{{ $candidate->percentage }}% dari total suara</span><span>100%</span></div>
+            <div style="display:flex;justify-content:space-between;color:#8e8e8e;margin-top:8px;font-size:13px"><span>0%</span><span>{{ $candidate->percentage }}% dari total suara</span><span>100%</span></div>
         </article>
     @endforeach
 </section>
-<p style="color:var(--muted);margin-top:38px">◷ Terakhir diperbarui: <strong style="color:#fff">{{ now()->format('d M Y, H:i') }} WIB</strong></p>
+<p style="color:var(--muted);margin-top:24px;font-size:14px">◷ Terakhir diperbarui: <strong style="color:#fff">{{ now()->format('d M Y, H:i') }} WIB</strong></p>
 @endsection

@@ -21,12 +21,12 @@ class SettingController extends Controller
     public function update(Request $request, AuditLogService $auditLog): RedirectResponse
     {
         $data = $request->validate([
-            'app_name' => ['required', 'string', 'max:255'],
-            'election_title' => ['required', 'string', 'max:255'],
-            'voting_status' => ['required', 'in:open,closed'],
-            'result_visibility' => ['required', 'boolean'],
-            'voting_start' => ['nullable', 'date'],
-            'voting_end' => ['nullable', 'date', 'after_or_equal:voting_start'],
+            'nama_aplikasi' => ['required', 'string', 'max:255'],
+            'judul_pemilihan' => ['required', 'string', 'max:255'],
+            'status_voting' => ['required', 'in:open,closed'],
+            'hasil_ditampilkan' => ['required', 'boolean'],
+            'mulai_voting' => ['nullable', 'date'],
+            'selesai_voting' => ['nullable', 'date', 'after_or_equal:mulai_voting'],
         ]);
 
         $setting = Setting::current();

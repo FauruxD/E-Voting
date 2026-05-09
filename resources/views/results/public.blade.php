@@ -6,7 +6,7 @@
 <main class="container narrow">
     <div class="header-row">
         <div>
-            <p class="eyebrow">{{ strtoupper($setting->election_title) }}</p>
+            <p class="eyebrow">{{ strtoupper($setting->judul_pemilihan) }}</p>
             <h1>Rincian Perolehan</h1>
             <p class="lead">Hasil penghitungan suara secara real-time. Data diperbarui setiap 30 detik.</p>
         </div>
@@ -21,7 +21,7 @@
         <div class="flash">{{ session('status') }}</div>
     @endif
 
-    @if (! $setting->result_visibility)
+    @if (! $setting->hasil_ditampilkan)
         <div class="notice">Hasil belum tersedia. Admin belum mengaktifkan publikasi hasil voting.</div>
     @else
         <section class="result-list">
@@ -29,11 +29,11 @@
                 <article class="result-card {{ $loop->first ? 'top' : '' }}">
                     <div class="result-head">
                         <div class="result-name">
-                            <div class="serial box">{{ str_pad($candidate->serial_number, 2, '0', STR_PAD_LEFT) }}</div>
+                            <div class="serial box">{{ str_pad($candidate->nomor_urut, 2, '0', STR_PAD_LEFT) }}</div>
                             <div>
-                                <div style="color:var(--muted);letter-spacing:6px;text-transform:uppercase">Pasangan Calon</div>
+                                <div style="color:var(--muted);letter-spacing:3px;text-transform:uppercase;font-size:12px">Pasangan Calon</div>
                                 <h2>{{ $candidate->pair_name }}</h2>
-                                <div class="result-meta"><strong style="color:#fff">{{ $candidate->votes_count }}</strong> suara &nbsp; • &nbsp; {{ $candidate->major }}</div>
+                                <div class="result-meta"><strong style="color:#fff">{{ $candidate->votes_count }}</strong> suara &nbsp; • &nbsp; {{ $candidate->prodi }}</div>
                             </div>
                         </div>
                         <div class="percent">{{ $candidate->percentage }}% <span>dari total suara</span></div>
@@ -44,7 +44,7 @@
             @endforeach
         </section>
 
-        <div class="stats-row" style="margin-top:70px">
+        <div class="stats-row" style="margin-top:32px">
             <div class="stat-card"><div>Total DPT</div><strong>{{ number_format($summary['totalVoters'], 0, ',', '.') }}</strong></div>
             <div class="stat-card"><div>Suara Sah</div><strong>{{ number_format($summary['totalVotes'], 0, ',', '.') }}</strong></div>
             <div class="stat-card"><div>Belum Memilih</div><strong>{{ number_format($summary['notVoted'], 0, ',', '.') }}</strong></div>

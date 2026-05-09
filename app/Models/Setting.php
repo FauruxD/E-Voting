@@ -10,30 +10,30 @@ class Setting extends Model
     use HasFactory;
 
     protected $fillable = [
-        'app_name',
-        'election_title',
-        'voting_status',
-        'result_visibility',
-        'voting_start',
-        'voting_end',
+        'nama_aplikasi',
+        'judul_pemilihan',
+        'status_voting',
+        'hasil_ditampilkan',
+        'mulai_voting',
+        'selesai_voting',
     ];
 
     protected function casts(): array
     {
         return [
-            'result_visibility' => 'boolean',
-            'voting_start' => 'datetime',
-            'voting_end' => 'datetime',
+            'hasil_ditampilkan' => 'boolean',
+            'mulai_voting' => 'datetime',
+            'selesai_voting' => 'datetime',
         ];
     }
 
     public static function current(): self
     {
         return static::query()->firstOrCreate([], [
-            'app_name' => 'BEM E-Voting',
-            'election_title' => 'Pemilihan Umum BEM 2026',
-            'voting_status' => 'closed',
-            'result_visibility' => false,
+            'nama_aplikasi' => 'BEM E-Voting',
+            'judul_pemilihan' => 'Pemilihan Umum BEM 2026',
+            'status_voting' => 'closed',
+            'hasil_ditampilkan' => false,
         ]);
     }
 
@@ -41,15 +41,15 @@ class Setting extends Model
     {
         $now = now();
 
-        if ($this->voting_status !== 'open') {
+        if ($this->status_voting !== 'open') {
             return false;
         }
 
-        if ($this->voting_start && $now->lt($this->voting_start)) {
+        if ($this->mulai_voting && $now->lt($this->mulai_voting)) {
             return false;
         }
 
-        if ($this->voting_end && $now->gt($this->voting_end)) {
+        if ($this->selesai_voting && $now->gt($this->selesai_voting)) {
             return false;
         }
 

@@ -19,7 +19,7 @@ class VotingService
             throw new Exception('Admin tidak dapat memberikan suara.');
         }
 
-        if (! $user->is_active) {
+        if (! $user->aktif) {
             throw new Exception('Akun Anda tidak aktif.');
         }
 
@@ -34,17 +34,17 @@ class VotingService
         DB::transaction(function () use ($user, $candidate) {
             $lockedUser = User::whereKey($user->id)->lockForUpdate()->firstOrFail();
 
-            if ($lockedUser->has_voted || Vote::where('user_id', $lockedUser->id)->exists()) {
+            if ($lockedUser->sudah_memilih || Vote::where('pemilih_id', $lockedUser->id)->exists()) {
                 throw new Exception('Anda sudah melakukan voting.');
             }
 
             Vote::create([
-                'user_id' => $lockedUser->id,
-                'candidate_id' => $candidate->id,
-                'voted_at' => now(),
+                'pemilih_id' => $lockedUser->id,
+                'kandidat_id' => $candidate->id,
+                'dipilih_pada' => now(),
             ]);
 
-            $lockedUser->update(['has_voted' => true]);
+            $lockedUser->update(['sudah_memilih' => true]);
         });
     }
 }

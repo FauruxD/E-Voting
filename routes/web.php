@@ -13,14 +13,14 @@ Route::get('/login', [AuthController::class, 'loginPage'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::middleware(['auth', 'role:voter'])->group(function () {
+Route::middleware(['auth', 'peran:voter'])->group(function () {
     Route::get('/dashboard', [VotingController::class, 'index'])->name('voter.dashboard');
     Route::get('/candidates/{candidate}', [CandidatePublicController::class, 'show'])->name('candidates.show');
     Route::post('/vote/{candidate}', [VotingController::class, 'store'])->name('vote.store');
     Route::get('/results', [ResultController::class, 'public'])->name('results.public');
 });
 
-Route::middleware(['auth', 'role:admin'])
+Route::middleware(['auth', 'peran:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
