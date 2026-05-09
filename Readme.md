@@ -12,6 +12,7 @@
 9. `php artisan storage:link`
 10. `php artisan serve`
 
+---
 
 ## 1. Overview
 
