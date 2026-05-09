@@ -1,5 +1,18 @@
 # BEM E-Voting System — Laravel
 
+## Langkah Instalasi
+git clone URL_REPO e-voting_bem
+cd e-voting_bem
+composer install
+npm install
+npm run build
+copy .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan storage:link
+php artisan serve
+
+
 ## 1. Overview
 
 BEM E-Voting System adalah aplikasi web berbasis Laravel untuk pemilihan umum BEM secara digital. Sistem ini digunakan oleh mahasiswa sebagai pemilih dan admin/panitia sebagai pengelola pemilu.
