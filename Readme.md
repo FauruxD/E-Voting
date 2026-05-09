@@ -1,7 +1,7 @@
 # BEM E-Voting System — Laravel
 
 ## Langkah Instalasi
-1. `git clone URL_REPO e-voting_bem`
+1. `git clone https://github.com/FauruxD/E-Voting.git`
 2. `cd e-voting_bem`
 3. `composer install`
 4. `npm install`
