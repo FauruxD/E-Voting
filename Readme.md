@@ -1,16 +1,16 @@
 # BEM E-Voting System — Laravel
 
 ## Langkah Instalasi
-- git clone URL_REPO e-voting_bem
-- cd e-voting_bem
-- composer install
-- npm install
-- npm run build
-- copy .env.example .env
-- php artisan key:generate
-- php artisan migrate:fresh --seed
-- php artisan storage:link
-- php artisan serve
+1. `git clone URL_REPO e-voting_bem`
+2. `cd e-voting_bem`
+3. `composer install`
+4. `npm install`
+5. `npm run build`
+6. `copy .env.example .env`
+7. `php artisan key:generate`
+8. `php artisan migrate:fresh --seed`
+9. `php artisan storage:link`
+10. `php artisan serve`
 
 
 ## 1. Overview
